@@ -1,0 +1,59 @@
+# ~/.tmuxinator/demyst.yml
+
+name: demyst
+root: ~/engine3
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - home: cd ~/engine3
+  - repo:
+    - cd ~/engine3
+    - vim
+  - local_c:
+    - bundle exec rails c
+  - local_t:
+    - bundle exec rails c test
+  - local_s:
+    - bundle exec rails s
+  - us_con_1:
+    - bundle exec rake aws:ssh[controller]
+  - us_con_2:
+    - bundle exec rake aws:ssh[controller]
+  - api_8cb_1:
+    - bundle exec rake aws:ssh[i-8cb8fca6]
+  - api_8cb_2:
+    - bundle exec rake aws:ssh[i-8cb8fca6]
+  - api_07e_1:
+    - bundle exec rake aws:ssh[i-07eacc2d]
+  - api_07e_2:
+    - bundle exec rake aws:ssh[i-07eacc2d]
+  - api_ad7_1:
+    - bundle exec rake aws:ssh[i-ad705787]
+  - api_ad7_2:
+    - bundle exec rake aws:ssh[i-ad705787]
+  - us_db_1:
+    - bundle exec rake aws:ssh[i-f18c8191]
+  - us_db_2:
+    - bundle exec rake aws:ssh[i-1ab1dd71]
+  - us_db_3:
+    - bundle exec rake aws:ssh[i-9a87fcf9]
+  - us_cass_1:
+    - bundle exec rake aws:ssh[i-6d7a1f00]
+  - eu_con:
+    - REGION=eu bundle exec rake aws:ssh[controller]
+  - au_con:
+    - REGION=au bundle exec rake aws:ssh[controller]
